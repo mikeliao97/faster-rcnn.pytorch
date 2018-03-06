@@ -43,6 +43,15 @@ class _fasterRCNN(nn.Module):
         gt_boxes = gt_boxes.data
         num_boxes = num_boxes.data
 
+        #for dla convert the images to be divisible by 32
+        print('image data size', im_data.size())
+        padh = (im_data.size(2) // 32) * 32 + 32
+        padw = (im_data.size(3) // 32) * 32 + 32
+        diffh = (padh - im_data.size(2)) // 2
+        diffw = (padw - im_data.size(3)) // 2
+
+        im_data = F.pad(im_data, (diffw, diffw, diffh, diffh))
+        print('image data size after', im_data.size())
         # feed image data to base model to obtain base feature map
         base_feat = self.RCNN_base(im_data)
 

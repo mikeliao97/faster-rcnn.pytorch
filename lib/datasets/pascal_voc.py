@@ -25,6 +25,7 @@ from .imdb import ROOT_DIR
 from . import ds_utils
 from .voc_eval import voc_eval
 
+
 # TODO: make fast_rcnn irrelevant
 # >>>> obsolete, because it depends on sth outside of this project
 from model.utils.config import cfg
@@ -124,7 +125,7 @@ class pascal_voc(imdb):
         cache_file = os.path.join(self.cache_path, self.name + '_gt_roidb.pkl')
         if os.path.exists(cache_file):
             with open(cache_file, 'rb') as fid:
-                roidb = pickle.load(fid)
+            	roidb = pickle.load(fid)
             print('{} gt roidb loaded from {}'.format(self.name, cache_file))
             return roidb
 
